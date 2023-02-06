@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter/widgets.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,11 +31,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("DoomStock"),
-        ),
-        body: SingleChildScrollView(
+    return Material(
+      color: context.canvasColor,
+
+        child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
@@ -115,7 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                                       fontSize: 18),
                                 ),
                           decoration: BoxDecoration(
-                              color: Colors.pink,
+                              // ignore: deprecated_member_use
+                              color: context.theme.buttonColor,
                               borderRadius:
                                   BorderRadius.circular(changeButton ? 50 : 8)),
                         ),
