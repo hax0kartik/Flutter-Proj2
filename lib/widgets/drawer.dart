@@ -18,12 +18,14 @@ class MyDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 child: UserAccountsDrawerHeader(
                     margin: EdgeInsets.zero,
-                    decoration: BoxDecoration(color: Colors.red),
-                    accountName: Text("Rishi Asthana",style: TextStyle(fontSize: 25),),
+                    decoration: BoxDecoration(color: Colors.black),
+                    accountName: Text("Rishi Asthana",style: TextStyle(fontSize: 20),),
                     accountEmail: Text("asthana@gmail.com",style: TextStyle(fontSize: 15),),
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: NetworkImage(imgUrl),
+                      maxRadius: 10,
                     ))),
+                    SizedBox(height: 30),
             ListTile(
               leading: Icon(
                 CupertinoIcons.home,

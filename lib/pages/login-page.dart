@@ -33,14 +33,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Material(
       color: context.canvasColor,
-
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 SizedBox(
-                  height: 50.0,
+                  height: 150.0,
                 ),
                 Image.asset(
                   "assets/images/login.png",

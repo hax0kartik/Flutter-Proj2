@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/cart.dart';
 import 'package:flutter_application_1/pages/home_detailpage.dart';
 import 'package:flutter_application_1/widgets/home_widgets/ItemImage.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_application_1/widgets/themes.dart';
 import '../../models/items.dart';
 import '../../pages/home_page.dart';
+import 'AddtoCart.dart';
 
 class ModelList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: Model.items?.length,
       itemBuilder: (context, index) {
-        final catalog = Model.getByPos(index);
+        final catalog = Model.items![index];
         return InkWell(
-          onTap: () => Navigator.push(context,MaterialPageRoute(builder: (context) => HomeDetailPage(catalog: catalog))),
-          child: catalogItem(catalog: catalog));
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeDetailPage(catalog: catalog))),
+            child: catalogItem(catalog: catalog));
       },
     );
   }
 }
+
 class catalogItem extends StatelessWidget {
-  final Item? catalog;
+  final Item catalog;
 
   const catalogItem({super.key, required this.catalog})
       : assert(catalog != null);
@@ -33,10 +38,10 @@ class catalogItem extends StatelessWidget {
         child: Row(
       children: [
         Hero(
-          tag: Key(catalog!.id.toString()),
-          child: ItemImage(image: catalog!.image)),
+            tag: Key(catalog!.id.toString()),
+            child: ItemImage(image: catalog!.image)),
         Expanded(
-          child: Column(
+            child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,24 +54,13 @@ class catalogItem extends StatelessWidget {
               buttonPadding: EdgeInsets.zero,
               children: [
                 "\$${catalog!.price}".text.bold.xl.make(),
-                ElevatedButton(
-                  onPressed: (() {}), 
-                  style: ButtonStyle(
-                    // ignore: deprecated_member_use
-                    backgroundColor: MaterialStateProperty.all(context.theme.buttonColor),
-                    shape: MaterialStateProperty.all(
-                      StadiumBorder()
-                    )
-                  ),
-                  child: "Add to Cart".text.make()
-                  )
+                AddtoCart(Catalog: catalog)
               ],
             ).pOnly(right: 8.0)
-
           ],
-        )
-        )
+        ))
       ],
     )).color(context.cardColor).roundedLg.square(150).make().py16();
   }
 }
+
