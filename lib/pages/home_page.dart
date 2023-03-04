@@ -11,6 +11,8 @@ import 'package:velocity_x/velocity_x.dart';
 import '../widgets/item_widget.dart';
 import '../widgets/home_widgets/KartHeader.dart';
 import '../widgets/home_widgets/ModelList.dart';
+import '../firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,11 +26,21 @@ class _HomePageState extends State<HomePage> {
     loadData();
   }
 
+  loadDataBase() async {
+    FirebaseDatabase database = FirebaseDatabase.instance;
+    final ref = database.ref();
+    final snapshot = await ref.get();
+    if (snapshot.exists) {
+      print(snapshot.value);
+    } else {
+      print('No data available.');
+    }
+    return snapshot.value;
+  }
+
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
-    final itJson = await rootBundle.loadString("assets/files/catalog.json");
-    var decodeData = jsonDecode(itJson);
-    var productsData = decodeData["products"];
+    final products = await loadDataBase();
+    var productsData = products["products"];
     Model.items = List.from(productsData)
         .map<Item>((item) => Item.fromMap(item))
         .toList();

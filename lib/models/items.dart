@@ -62,14 +62,14 @@ class Item {
     };
   }
 
-  factory Item.fromMap(Map<String, dynamic> map) {
+  factory Item.fromMap(Map<dynamic, dynamic> map) {
     return Item(
-      id: map['id'],
-      name: map['name'],
-      desc: map['desc'],
-      price: map['price'],
-      color: map['color'],
-      image: map['image'],
+      id: map['id'] as int,
+      name: map['name'] as String,
+      desc: map['desc'] as String,
+      price: map['price'] as num,
+      color: map['color'] as String,
+      image: map['image'] as String,
     );
   }
 
